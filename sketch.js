@@ -73,11 +73,11 @@ function draw() {
   text("Score: "+ score, 500,50);
   
   if (gameState===PLAY){
-    score = score + Math.round(getFrameRate()/60);
+    score = score + Math.round(getFrameRate()/120);
     ground.velocityX = -(6 + 3*score/100);
   
     if(keyDown("space") && trex.y >= 159) {
-      trex.velocityY = -12;
+      trex.velocityY = -10;
     }
   
     trex.velocityY = trex.velocityY + 0.8
@@ -116,7 +116,7 @@ function draw() {
     }
   }
   
-  trex.debug = true;
+  //trex.debug = true;
   drawSprites();
 }
 
@@ -184,7 +184,8 @@ function reset(){
   
   trex.changeAnimation("running",trex_running);
   
-  if(localStorage["HighestScore"]<score){
+  if(localStorage["HighestScore"]<score)
+  {
     localStorage["HighestScore"] = score;
   }
   console.log(localStorage["HighestScore"]);
