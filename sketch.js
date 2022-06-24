@@ -12,6 +12,8 @@ var score=0;
 
 var gameOver, restart;
 
+var r;
+
 localStorage["HighestScore"] = 0;
 
 function preload(){
@@ -69,6 +71,7 @@ function setup() {
 }
 
 function draw() {
+  //trex.debug = true;
   background(255);
   text("Score: "+ score/2, 500,50);
   
@@ -76,7 +79,7 @@ function draw() {
     score = score + Math.round(getFrameRate()/60);
     ground.velocityX = -(6 + 3*score/100);
   
-    if(keyDown("space") && trex.y >= 159) {
+    if(keyDown("space") && trex.y >= 159 || keyDown("UP_ARROW") && trex.y >= 159) {
       trex.velocityY = -12;
     }
   
@@ -111,12 +114,12 @@ function draw() {
     obstaclesGroup.setLifetimeEach(-1);
     cloudsGroup.setLifetimeEach(-1);
     
-    if(mousePressedOver(restart)) {
+    if(mousePressedOver(restart) || keyDown("space")) {
       reset();
     }
   }
   
-  //trex.debug = true;
+  
   drawSprites();
 }
 
@@ -143,7 +146,8 @@ function spawnClouds() {
 }
 
 function spawnObstacles() {
-  if(frameCount % 60 === 0) {
+  //r = Math.round(random(60,90));
+  if(frameCount % 50 === 0) {
     var obstacle = createSprite(600,165,10,40);
     //obstacle.debug = true;
     obstacle.velocityX = -(6 + 3*score/100);
@@ -184,8 +188,7 @@ function reset(){
   
   trex.changeAnimation("running",trex_running);
   
-  if(localStorage["HighestScore"]<score)
-  {
+  if(localStorage["HighestScore"]<score){
     localStorage["HighestScore"] = score;
   }
   console.log(localStorage["HighestScore"]);
