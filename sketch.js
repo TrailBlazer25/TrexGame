@@ -69,7 +69,6 @@ function setup() {
 }
 
 function draw() {
-  trex.debug = true;
   background(255);
   text("Score: "+ score, 500,50);
   
@@ -117,7 +116,7 @@ function draw() {
     }
   }
   
-  
+  trex.debug = true;
   drawSprites();
 }
 
